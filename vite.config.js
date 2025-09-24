@@ -11,5 +11,15 @@ export default defineConfig({
       }
     }),
     tailwindcss()
-  ]
+  ],
+  server: {
+    proxy: {
+      "/api": {
+        target: "https://brickset.com/api/v3.asmx",
+        changeOrigin: true,
+        secure: false,
+        rewrite: (path) => path.replace(/^\/api/, "")
+      }
+    }
+  }
 });
